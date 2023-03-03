@@ -1,6 +1,7 @@
+import { HeaderComponent } from './../header/header.component';
 import { ProductService } from './../../services/product.service';
 import { Product } from './../../models/Product.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -21,12 +22,18 @@ export class HomeComponent implements OnInit{
   }
 
   getProdotti() {
-    this.productS.getProducts().subscribe(
+    /*this.productS.getProducts().subscribe(
       (data: Product[]) => {
       console.log("prodotti: ", data);
       this.prodotti = data;
     }, (error: HttpErrorResponse) => console.log("Errore nel caricamento prodotti")
     )
+    */
+   this.productS.selectedProducts$.subscribe(
+    (data: Product[]) => {
+      this.prodotti = data;
+    }, (error: HttpErrorResponse) => console.log(error.message)
+   )
   }
 
 }
