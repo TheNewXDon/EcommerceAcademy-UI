@@ -8,13 +8,27 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AboutComponent } from './components/info/about/about.component';
+import { PrivacyComponent } from './components/info/privacy/privacy.component';
+import { TermsComponent } from './components/info/terms/terms.component';
+import { FaqsComponent } from './components/info/faqs/faqs.component';
+import { HelpComponent } from './components/info/help/help.component';
+import { DeliveryComponent } from './components/info/delivery/delivery.component';
+import { RefundsComponent } from './components/info/refunds/refunds.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    HomeComponent
+    HomeComponent,
+    AboutComponent,
+    PrivacyComponent,
+    TermsComponent,
+    FaqsComponent,
+    HelpComponent,
+    DeliveryComponent,
+    RefundsComponent
   ],
   imports: [
     BrowserModule,
