@@ -7,4 +7,16 @@ import { Component } from '@angular/core';
 })
 export class FooterComponent {
 
+  goUp() {
+    setTimeout(
+      () => {
+        document.getElementById("header")!.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+          inline: "nearest"
+        });
+      },500
+    )
+
+  }
 }
