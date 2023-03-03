@@ -1,7 +1,7 @@
 import { Product } from './../models/Product.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -30,5 +30,12 @@ export class ProductService {
 
   deleteProduct(id: number): Observable<void> {
     return this.http.get<void>(`${this.apiServer}/product/` + id);
+  }
+
+  private products$ = new BehaviorSubject<any>({});
+  selectedProducts$ = this.products$.asObservable();
+
+  setProducts(products: Product[]) {
+    this.products$.next(products);
   }
 }
