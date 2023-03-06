@@ -34,3 +34,7 @@ body{
 .qty{
   font-size:12px;
 }
+
+.btn:hover {
+  border: 1px solid black;
+}

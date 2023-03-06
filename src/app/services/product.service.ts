@@ -34,8 +34,13 @@ export class ProductService {
 
   private products$ = new BehaviorSubject<any>({});
   selectedProducts$ = this.products$.asObservable();
+  private cartProducts$ = new BehaviorSubject<Product[]>([]);
+  selectedCartProducts$ = this.cartProducts$.asObservable();
 
   setProducts(products: Product[]) {
     this.products$.next(products);
+  }
+  setCartProducts(cartProducts: Product[]) {
+    this.cartProducts$.next(cartProducts);
   }
 }
