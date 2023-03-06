@@ -15,6 +15,8 @@ import { FaqsComponent } from './components/info/faqs/faqs.component';
 import { HelpComponent } from './components/info/help/help.component';
 import { DeliveryComponent } from './components/info/delivery/delivery.component';
 import { RefundsComponent } from './components/info/refunds/refunds.component';
+import { CartComponent } from './components/cart/cart.component';
+import { ProductInfoComponent } from './components/product-info/product-info.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { RefundsComponent } from './components/info/refunds/refunds.component';
     FaqsComponent,
     HelpComponent,
     DeliveryComponent,
-    RefundsComponent
+    RefundsComponent,
+    CartComponent,
+    ProductInfoComponent
   ],
   imports: [
     BrowserModule,

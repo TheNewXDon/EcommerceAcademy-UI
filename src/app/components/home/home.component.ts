@@ -13,12 +13,14 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class HomeComponent implements OnInit{
 
   prodotti!: Product[];
+  cartProducts: Product[] = [];
 
 
   constructor(private productS: ProductService, private router: Router) { }
 
   ngOnInit(): void {
     this.getProdotti();
+    this.getCartProducts();
   }
 
   getProdotti() {
@@ -34,6 +36,20 @@ export class HomeComponent implements OnInit{
       this.prodotti = data;
     }, (error: HttpErrorResponse) => console.log(error.message)
    )
+  }
+  getCartProducts() {
+    this.productS.selectedCartProducts$.subscribe(
+      (data: Product[]) => {
+        console.log(data);
+        this.cartProducts = data;
+      }, (error: HttpErrorResponse) => console.log(error.message)
+    )
+  }
+
+  addToCart(product: Product) {
+    this.cartProducts.push(product);
+    this.productS.setCartProducts(this.cartProducts);
+    console.log(this.cartProducts, this.productS.selectedCartProducts$);
   }
 
 }

@@ -1,1 +1,11 @@
-<p>help works!</p>
+<form #form="ngForm" class="form">
+  <h2>CONTACT US</h2>
+  <p type="Name:"><input id="name" name="name" ngModel placeholder="Write your name here.."/></p>
+  <p type="Email:"><input id="name" name="name" ngModel placeholder="Let us know how to contact you back.."/></p>
+  <p type="Message:"><input id="message" name="message" ngModel placeholder="What would you like to tell us.."/></p>
+  <button type="submit" [disabled]="!form.valid">Send Message</button>
+</form>
+<div>
+  <span class="fa fa-phone"></span>001 1023 567
+  <span class="fa fa-envelope-o"></span> contact@ecommerceacademy.com
+</div>

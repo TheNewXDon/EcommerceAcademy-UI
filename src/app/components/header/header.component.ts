@@ -13,6 +13,7 @@ export class HeaderComponent implements OnInit{
 
   products!: Product[];
   allProducts!: Product[];
+  cartProducts: Product[] = [];
 
   constructor(private productS: ProductService) { }
 
@@ -23,6 +24,7 @@ export class HeaderComponent implements OnInit{
         this.products = data;
       }, (error: HttpErrorResponse) => console.log(error.message)
      )
+     this.getCartProducts();
   }
 
   getProducts() {
@@ -31,6 +33,14 @@ export class HeaderComponent implements OnInit{
         this.products = data;
         this.allProducts = data;
         this.productS.setProducts(data);
+      }, (error: HttpErrorResponse) => console.log(error.message)
+    )
+  }
+
+  getCartProducts() {
+    this.productS.selectedCartProducts$.subscribe(
+      (data: Product[]) => {
+        this.cartProducts = data;
       }, (error: HttpErrorResponse) => console.log(error.message)
     )
   }
@@ -64,5 +74,11 @@ export class HeaderComponent implements OnInit{
     console.log("Results ", results);
     this.products = results;
     this.productS.setProducts(results);
+  }
+
+  public getCartPrice(): number{
+    let sum = 0;
+    this.cartProducts.forEach((product) => sum += product.costo);
+    return sum;
   }
 }
