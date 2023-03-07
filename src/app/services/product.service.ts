@@ -29,18 +29,13 @@ export class ProductService {
   }
 
   deleteProduct(id: number): Observable<void> {
-    return this.http.get<void>(`${this.apiServer}/product/` + id);
+    return this.http.delete<void>(`${this.apiServer}/product/` + id);
   }
 
   private products$ = new BehaviorSubject<any>({});
   selectedProducts$ = this.products$.asObservable();
-  private cartProducts$ = new BehaviorSubject<Product[]>([]);
-  selectedCartProducts$ = this.cartProducts$.asObservable();
 
   setProducts(products: Product[]) {
     this.products$.next(products);
-  }
-  setCartProducts(cartProducts: Product[]) {
-    this.cartProducts$.next(cartProducts);
   }
 }

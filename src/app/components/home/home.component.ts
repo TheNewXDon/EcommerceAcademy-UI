@@ -4,6 +4,8 @@ import { Product } from './../../models/Product.model';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { CartProductService } from 'src/app/services/cart-product.service';
+import { CartProduct } from 'src/app/models/CartProduct.model';
 
 @Component({
   selector: 'app-home',
@@ -13,10 +15,10 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class HomeComponent implements OnInit{
 
   prodotti!: Product[];
-  cartProducts: Product[] = [];
+  cartProducts: CartProduct[] = [];
 
 
-  constructor(private productS: ProductService, private router: Router) { }
+  constructor(private productS: ProductService, private cartProductS: CartProductService, private router: Router) { }
 
   ngOnInit(): void {
     this.getProdotti();
@@ -38,18 +40,26 @@ export class HomeComponent implements OnInit{
    )
   }
   getCartProducts() {
-    this.productS.selectedCartProducts$.subscribe(
-      (data: Product[]) => {
+    this.cartProductS.selectedCartProducts$.subscribe(
+      (data: CartProduct[]) => {
         console.log(data);
         this.cartProducts = data;
       }, (error: HttpErrorResponse) => console.log(error.message)
     )
   }
 
-  addToCart(product: Product) {
-    this.cartProducts.push(product);
+  addToCart(product: CartProduct) {
+    /*this.cartProducts.push(product);
     this.productS.setCartProducts(this.cartProducts);
     console.log(this.cartProducts, this.productS.selectedCartProducts$);
+    */
+   this.cartProductS.saveCartProduct(product).subscribe(
+    (data: CartProduct) => {
+      this.cartProducts.push(data);
+      this.cartProductS.setCartProducts(this.cartProducts);
+      console.log(this.cartProducts, this.cartProductS.selectedCartProducts$);
+    }
+    )
   }
 
 }
