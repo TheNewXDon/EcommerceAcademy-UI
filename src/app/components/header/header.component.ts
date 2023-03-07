@@ -1,8 +1,10 @@
+import { CartProductService } from './../../services/cart-product.service';
 import { ProductService } from './../../services/product.service';
 import { Product } from './../../models/Product.model';
 import { Component, OnInit, NgModule } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgModel } from '@angular/forms';
+import { CartProduct } from 'src/app/models/CartProduct.model';
 
 @Component({
   selector: 'app-header',
@@ -13,9 +15,9 @@ export class HeaderComponent implements OnInit{
 
   products!: Product[];
   allProducts!: Product[];
-  cartProducts: Product[] = [];
+  cartProducts: CartProduct[] = [];
 
-  constructor(private productS: ProductService) { }
+  constructor(private productS: ProductService, private cartProductS: CartProductService) { }
 
   ngOnInit(): void {
     this.getProducts();
@@ -38,8 +40,8 @@ export class HeaderComponent implements OnInit{
   }
 
   getCartProducts() {
-    this.productS.selectedCartProducts$.subscribe(
-      (data: Product[]) => {
+    this.cartProductS.selectedCartProducts$.subscribe(
+      (data: CartProduct[]) => {
         this.cartProducts = data;
       }, (error: HttpErrorResponse) => console.log(error.message)
     )

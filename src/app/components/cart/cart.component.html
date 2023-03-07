@@ -36,7 +36,7 @@
           <div class="d-flex flex-row align-items-center" style="width: 10vw;">
             <!-- <span class="d-block">2</span> -->
             <span class="d-block ml-5 font-weight-bold">{{product.costo}} €</span>
-            <button class="btn" type="button">
+            <button class="btn" type="button" (click)="deleteCartProduct(product.id)">
               <i class="fa fa-trash-o ml-5 text-black-100" style="font-size: x-large; float: right;"></i>
             </button>
           </div>
